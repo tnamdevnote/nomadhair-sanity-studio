@@ -212,23 +212,15 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: ./groq/groq.ts
 // Variable: TIMESLOT_QUERY
-// Query: *[_type == "timeSlot"]
+// Query: *[_type=='timeSlot']{  'id': _id,  dayOfWeek,  duration[]{    'id': _key,    start,    end  }}
 export type TIMESLOT_QUERYResult = Array<{
-  _id: string;
-  _type: "timeSlot";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
+  id: string;
   dayOfWeek: string;
   duration: Array<{
-    _key: string;
-  } & Duration>;
-  stylist: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "stylist";
-  };
+    id: string;
+    start: TimeValue | null;
+    end: TimeValue | null;
+  }>;
 }>;
 // Variable: APPOINTMENT_QUERY
 // Query: *[_type=='appointment'  && customer->_id == ''  && dateTime(dateTime) > dateTime(now())]{  "id":_id,  dateTime,  address1,  address2,  city,  state,  zipCode,  comment,  customer->{"id": _id, firstName, lastName},  stylist->{"id": _id, firstName, lastName}}

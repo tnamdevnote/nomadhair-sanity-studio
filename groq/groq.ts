@@ -1,6 +1,14 @@
 import groq from 'groq'
 
-export const TIMESLOT_QUERY = groq`*[_type == "timeSlot"]`
+export const TIMESLOT_QUERY = groq`*[_type=='timeSlot']{
+  'id': _id,
+  dayOfWeek,
+  duration[]{
+    'id': _key,
+    start,
+    end
+  }
+}`
 
 export const APPOINTMENT_QUERY = groq`*[_type=='appointment'
   && customer->_id == ''

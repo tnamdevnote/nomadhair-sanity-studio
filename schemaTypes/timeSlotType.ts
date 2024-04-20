@@ -1,8 +1,8 @@
 import {defineField, defineType} from 'sanity'
 
-export const timeSlotType = defineType({
-  name: 'timeSlot',
-  title: 'TimeSlot',
+export const timeslotType = defineType({
+  name: 'timeslot',
+  title: 'Timeslot',
   type: 'document',
   fields: [
     defineField({
