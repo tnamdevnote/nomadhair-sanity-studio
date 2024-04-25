@@ -6,27 +6,27 @@ export const appointmentType = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'dateTime',
-      type: 'datetime',
-    }),
-    defineField({
       name: 'timeslot',
       type: 'reference',
       to: [{type: 'timeslot'}],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'stylist',
       type: 'reference',
       to: [{type: 'stylist'}],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'customer',
       type: 'reference',
       to: [{type: 'customer'}],
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'address1',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'address2',
@@ -35,14 +35,17 @@ export const appointmentType = defineType({
     defineField({
       name: 'city',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'state',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'zipCode',
       type: 'string',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'comment',

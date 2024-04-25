@@ -928,13 +928,6 @@
           "type": "string"
         }
       },
-      "dateTime": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": true
-      },
       "timeslot": {
         "type": "objectAttribute",
         "value": {

@@ -139,7 +139,6 @@ export type Appointment = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  dateTime?: string;
   timeslot?: {
     _ref: string;
     _type: "reference";
@@ -221,7 +220,7 @@ export type TIMESLOT_QUERYResult = Array<{
 // Query: *[_type=='appointment'  && customer->_id == ''  && dateTime(dateTime) > dateTime(now())]{  "id":_id,  dateTime,  address1,  address2,  city,  state,  zipCode,  comment,  customer->{"id": _id, firstName, lastName},  stylist->{"id": _id, firstName, lastName}}
 export type APPOINTMENT_QUERYResult = Array<{
   id: string;
-  dateTime: string | null;
+  dateTime: null;
   address1: string | null;
   address2: string | null;
   city: string | null;
