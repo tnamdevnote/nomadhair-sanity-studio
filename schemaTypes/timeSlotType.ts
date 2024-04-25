@@ -6,20 +6,19 @@ export const timeslotType = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'dayOfWeek',
-      type: 'string',
+      name: 'date',
+      type: 'date',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'duration',
-      type: 'array',
-      of: [{type: 'duration'}],
+      type: 'duration',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'stylist',
-      type: 'reference',
-      to: [{type: 'stylist'}],
+      name: 'reserved',
+      type: 'boolean',
+      initialValue: false,
       validation: (Rule) => Rule.required(),
     }),
   ],

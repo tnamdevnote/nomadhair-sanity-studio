@@ -1,14 +1,14 @@
 import groq from 'groq'
 
-export const TIMESLOT_QUERY = groq`*[_type=='timeSlot']{
+export const TIMESLOT_QUERY = groq`*[_type=='timeslot' 
+  && reserved==false
+  && date==''
+ ]{
   'id': _id,
-  dayOfWeek,
-  duration[]{
-    'id': _key,
-    start,
-    end
-  }
-}`
+  date,
+  'start': duration.start,
+  reserved
+ }`
 
 export const APPOINTMENT_QUERY = groq`*[_type=='appointment'
   && customer->_id == ''

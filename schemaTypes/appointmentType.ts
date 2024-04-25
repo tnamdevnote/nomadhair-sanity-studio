@@ -6,11 +6,13 @@ export const appointmentType = defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'status',
-      type: 'string',
-      options: {
-        list: ['active', 'expired'],
-      },
+      name: 'dateTime',
+      type: 'datetime',
+    }),
+    defineField({
+      name: 'timeslot',
+      type: 'reference',
+      to: [{type: 'timeslot'}],
     }),
     defineField({
       name: 'stylist',
@@ -21,10 +23,6 @@ export const appointmentType = defineType({
       name: 'customer',
       type: 'reference',
       to: [{type: 'customer'}],
-    }),
-    defineField({
-      name: 'dateTime',
-      type: 'datetime',
     }),
     defineField({
       name: 'address1',
