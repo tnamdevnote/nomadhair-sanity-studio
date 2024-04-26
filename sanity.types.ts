@@ -208,6 +208,12 @@ export type Duration = {
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: ./groq/groq.ts
+// Variable: AVAILABLE_DATE_QUERY
+// Query: *[_type=='timeslot'   && reserved==false ]{  'id': _id,  date, }
+export type AVAILABLE_DATE_QUERYResult = Array<{
+  id: string;
+  date: string | null;
+}>;
 // Variable: TIMESLOT_QUERY
 // Query: *[_type=='timeslot'   && reserved==false  && date=='' ]{  'id': _id,  date,  'start': duration.start,  reserved }
 export type TIMESLOT_QUERYResult = Array<{

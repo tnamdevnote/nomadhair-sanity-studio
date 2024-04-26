@@ -1,5 +1,12 @@
 import groq from 'groq'
 
+export const AVAILABLE_DATE_QUERY = groq`*[_type=='timeslot' 
+  && reserved==false
+ ]{
+  'id': _id,
+  date,
+ }`
+
 export const TIMESLOT_QUERY = groq`*[_type=='timeslot' 
   && reserved==false
   && date==''
