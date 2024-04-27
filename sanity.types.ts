@@ -223,10 +223,11 @@ export type TIMESLOT_QUERYResult = Array<{
   reserved: boolean | null;
 }>;
 // Variable: APPOINTMENT_QUERY
-// Query: *[_type=='appointment'  && customer->_id == ''  && dateTime(dateTime) > dateTime(now())]{  "id":_id,  dateTime,  address1,  address2,  city,  state,  zipCode,  comment,  customer->{"id": _id, firstName, lastName},  stylist->{"id": _id, firstName, lastName}}
+// Query: *[_type=='appointment'  && customer->_id == ''  && timeslot->date < now()]{  "id":_id,  "date":timeslot->date,  "time":timeslot->duration.start,  address1,  address2,  city,  state,  zipCode,  comment,  customer->{"id": _id, firstName, lastName},  stylist->{"id": _id, firstName, lastName}}
 export type APPOINTMENT_QUERYResult = Array<{
   id: string;
-  dateTime: null;
+  date: string | null;
+  time: TimeValue | null;
   address1: string | null;
   address2: string | null;
   city: string | null;

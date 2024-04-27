@@ -19,10 +19,11 @@ export const TIMESLOT_QUERY = groq`*[_type=='timeslot'
 
 export const APPOINTMENT_QUERY = groq`*[_type=='appointment'
   && customer->_id == ''
-  && dateTime(dateTime) > dateTime(now())
+  && timeslot->date < now()
 ]{
   "id":_id,
-  dateTime,
+  "date":timeslot->date,
+  "time":timeslot->duration.start,
   address1,
   address2,
   city,
