@@ -17,10 +17,10 @@ export const TIMESLOT_QUERY = groq`*[_type=='timeslot'
   reserved
  }`
 
-export const IS_TIMESLOT_RESERVED_QUERY = groq`*[_type=='timeslot'
-   && _id==''
+export const IS_TIMESLOT_RESERVED_QUERY = groq`*[_type=='appointment'
+  && timeslot->_id==''
  ]{
-  reserved
+  "timeslotId": timeslot->_id
  }`
 
 export const APPOINTMENT_QUERY = groq`*[_type=='appointment'
