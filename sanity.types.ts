@@ -222,6 +222,11 @@ export type TIMESLOT_QUERYResult = Array<{
   start: TimeValue | null;
   reserved: boolean | null;
 }>;
+// Variable: IS_TIMESLOT_RESERVED_QUERY
+// Query: *[_type=='appointment'  && timeslot->_id=='' ]{  "timeslotId": timeslot->_id }
+export type IS_TIMESLOT_RESERVED_QUERYResult = Array<{
+  timeslotId: string | null;
+}>;
 // Variable: APPOINTMENT_QUERY
 // Query: *[_type=='appointment'  && customer->_id == ''  && timeslot->date < now()]{  "id":_id,  "date":timeslot->date,  "time":timeslot->duration.start,  address1,  address2,  city,  state,  zipCode,  comment,  customer->{"id": _id, firstName, lastName},  stylist->{"id": _id, firstName, lastName}}
 export type APPOINTMENT_QUERYResult = Array<{
