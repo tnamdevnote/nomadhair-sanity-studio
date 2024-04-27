@@ -17,6 +17,12 @@ export const TIMESLOT_QUERY = groq`*[_type=='timeslot'
   reserved
  }`
 
+export const IS_TIMESLOT_RESERVED_QUERY = groq`*[_type=='timeslot'
+   && _id==''
+ ]{
+  reserved
+ }`
+
 export const APPOINTMENT_QUERY = groq`*[_type=='appointment'
   && customer->_id == ''
   && timeslot->date < now()
