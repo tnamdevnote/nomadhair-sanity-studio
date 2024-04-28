@@ -209,24 +209,21 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: ./groq/groq.ts
 // Variable: AVAILABLE_DATE_QUERY
-// Query: *[_type=='timeslot'   && reserved==false ]{  'id': _id,  date, }
+// Query: *[_type=='timeslot'  && !(_id in *[_type=='appointment'].timeslot._ref)]{  "id": _id,  date,}
 export type AVAILABLE_DATE_QUERYResult = Array<{
   id: string;
   date: string | null;
 }>;
 // Variable: TIMESLOT_QUERY
-// Query: *[_type=='timeslot'   && reserved==false  && date=='' ]{  'id': _id,  date,  'start': duration.start,  reserved }
+// Query: *[_type=='timeslot'  && date==''  && !(_id in *[_type=='appointment'].timeslot._ref)]{  "id": _id,  date,  "startTime": duration.start}
 export type TIMESLOT_QUERYResult = Array<{
   id: string;
   date: string | null;
-  start: TimeValue | null;
-  reserved: boolean | null;
+  startTime: TimeValue | null;
 }>;
 // Variable: IS_TIMESLOT_RESERVED_QUERY
-// Query: *[_type=='appointment'  && timeslot->_id=='' ]{  "timeslotId": timeslot->_id }
-export type IS_TIMESLOT_RESERVED_QUERYResult = Array<{
-  timeslotId: string | null;
-}>;
+// Query: count(*[_type=='appointment'   && references('') ]) > 0
+export type IS_TIMESLOT_RESERVED_QUERYResult = unknown;
 // Variable: APPOINTMENT_QUERY
 // Query: *[_type=='appointment'  && customer->_id == ''  && timeslot->date < now()]{  "id":_id,  "date":timeslot->date,  "time":timeslot->duration.start,  address1,  address2,  city,  state,  zipCode,  comment,  customer->{"id": _id, firstName, lastName},  stylist->{"id": _id, firstName, lastName}}
 export type APPOINTMENT_QUERYResult = Array<{

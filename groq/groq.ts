@@ -1,27 +1,32 @@
 import groq from 'groq'
 
-export const AVAILABLE_DATE_QUERY = groq`*[_type=='timeslot' 
-  && reserved==false
- ]{
-  'id': _id,
+/**
+ * Find available dates on a given date that
+ * are not referenced in Appointment document.
+ */
+export const AVAILABLE_DATE_QUERY = groq`*[_type=='timeslot'
+  && !(_id in *[_type=='appointment'].timeslot._ref)
+]{
+  "id": _id,
   date,
- }`
+}`
 
-export const TIMESLOT_QUERY = groq`*[_type=='timeslot' 
-  && reserved==false
+/**
+ * Find available timeslots on a given date that
+ * are not referenced in Appointment document.
+ */
+export const TIMESLOT_QUERY = groq`*[_type=='timeslot'
   && date==''
- ]{
-  'id': _id,
+  && !(_id in *[_type=='appointment'].timeslot._ref)
+]{
+  "id": _id,
   date,
-  'start': duration.start,
-  reserved
- }`
+  "startTime": duration.start
+}`
 
-export const IS_TIMESLOT_RESERVED_QUERY = groq`*[_type=='appointment'
-  && timeslot->_id==''
- ]{
-  "timeslotId": timeslot->_id
- }`
+export const IS_TIMESLOT_RESERVED_QUERY = groq`count(*[_type=='appointment' 
+  && references('')
+ ]) > 0`
 
 export const APPOINTMENT_QUERY = groq`*[_type=='appointment'
   && customer->_id == ''
