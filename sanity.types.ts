@@ -133,6 +133,12 @@ export type SanityAssetSourceData = {
 
 export type TimeValue = "00:00" | "00:30" | "01:00" | "01:30" | "02:00" | "02:30" | "03:00" | "03:30" | "04:00" | "04:30" | "05:00" | "05:30" | "06:00" | "06:30" | "07:00" | "07:30" | "08:00" | "08:30" | "09:00" | "09:30" | "10:00" | "10:30" | "11:00" | "11:30" | "12:00" | "12:30" | "13:00" | "13:30" | "14:00" | "14:30" | "15:00" | "15:30" | "16:00" | "16:30" | "17:00" | "17:30" | "18:00" | "18:30" | "19:00" | "19:30" | "20:00" | "20:30" | "21:00" | "21:30" | "22:00" | "22:30" | "23:00" | "23:30";
 
+export type Duration = {
+  _type: "duration";
+  start?: TimeValue;
+  end?: TimeValue;
+};
+
 export type Appointment = {
   _id: string;
   _type: "appointment";
@@ -195,42 +201,29 @@ export type Timeslot = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  timeslot?: string;
   date?: string;
-  duration?: Duration;
-  reserved?: boolean;
-};
-
-export type Duration = {
-  _type: "duration";
-  start?: TimeValue;
-  end?: TimeValue;
 };
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: ./groq/groq.ts
-// Variable: AVAILABLE_DATE_QUERY
-// Query: *[_type=='timeslot'  && !(_id in *[_type=='appointment'].timeslot._ref)  && date >= now()]{  "id": _id,  date,}
-export type AVAILABLE_DATE_QUERYResult = Array<{
-  id: string;
-  date: string | null;
-}>;
 // Variable: AVAILABLE_TIMESLOT_QUERY
-// Query: *[_type=='timeslot'  && date==''  && !(_id in *[_type=='appointment'].timeslot._ref)]{  "id": _id,  date,  "time": duration.start}
+// Query: *[_type=='timeslot' && !(_id in *[_type=='appointment'].timeslot._ref) && date == ''  && dateTime(timeslot) >= dateTime(now())]{  "id": _id,  date,  timeslot,}
 export type AVAILABLE_TIMESLOT_QUERYResult = Array<{
   id: string;
   date: string | null;
-  time: TimeValue | null;
+  timeslot: string | null;
 }>;
 // Variable: IS_TIMESLOT_RESERVED_QUERY
 // Query: count(*[_type=='appointment'   && references('') ]) > 0
 export type IS_TIMESLOT_RESERVED_QUERYResult = unknown;
 // Variable: APPOINTMENT_QUERY
-// Query: *[_type=='appointment'  && customer->_id == '']{  "id":_id,  "timeslotId":timeslot->_id,  "date":timeslot->date,  "time":timeslot->duration.start,  address1,  address2,  city,  state,  zipCode,  comment,  customer->{"id": _id, firstName, lastName},  stylist->{"id": _id, firstName, lastName}}
+// Query: *[_type=='appointment'  && customer->_id == ''  && dateTime(timeslot->timeslot) >= dateTime(now())]{  "id":_id,  "timeslotId":timeslot->_id,  "date":timeslot->date,  "time":timeslot->timeslot,  address1,  address2,  city,  state,  zipCode,  comment,  customer->{"id": _id, firstName, lastName},  stylist->{"id": _id, firstName, lastName}}
 export type APPOINTMENT_QUERYResult = Array<{
   id: string;
   timeslotId: string | null;
   date: string | null;
-  time: TimeValue | null;
+  time: string | null;
   address1: string | null;
   address2: string | null;
   city: string | null;

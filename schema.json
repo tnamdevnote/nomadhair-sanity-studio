@@ -894,6 +894,38 @@
     }
   },
   {
+    "name": "duration",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "duration"
+          }
+        },
+        "start": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "timeValue"
+          },
+          "optional": true
+        },
+        "end": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "timeValue"
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
     "name": "appointment",
     "type": "document",
     "attributes": {
@@ -1227,59 +1259,19 @@
           "type": "string"
         }
       },
-      "date": {
+      "timeslot": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
         "optional": true
       },
-      "duration": {
+      "date": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "duration"
+          "type": "string"
         },
         "optional": true
-      },
-      "reserved": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "boolean"
-        },
-        "optional": true
-      }
-    }
-  },
-  {
-    "name": "duration",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "duration"
-          }
-        },
-        "start": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "timeValue"
-          },
-          "optional": true
-        },
-        "end": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "inline",
-            "name": "timeValue"
-          },
-          "optional": true
-        }
       }
     }
   }
