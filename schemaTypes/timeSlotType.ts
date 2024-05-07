@@ -5,8 +5,7 @@ export const timeslotType = defineType({
   type: 'document',
   fields: [
     defineField({
-      title: 'Timeslot',
-      name: 'timeslot',
+      name: 'time',
       type: 'datetime',
       options: {
         timeStep: 30,

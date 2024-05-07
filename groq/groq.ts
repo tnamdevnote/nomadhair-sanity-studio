@@ -19,11 +19,11 @@ import groq from 'groq'
 export const AVAILABLE_TIMESLOT_QUERY = groq`*[_type=='timeslot'
  && !(_id in *[_type=='appointment'].timeslot._ref)
  && date == '' 
- && dateTime(timeslot) >= dateTime(now())
+ && dateTime(time) >= dateTime(now())
 ]{
   "id": _id,
   date,
-  timeslot,
+  time,
 }`
 
 export const IS_TIMESLOT_RESERVED_QUERY = groq`count(*[_type=='appointment' 
@@ -32,12 +32,12 @@ export const IS_TIMESLOT_RESERVED_QUERY = groq`count(*[_type=='appointment'
 
 export const APPOINTMENT_QUERY = groq`*[_type=='appointment'
   && customer->_id == ''
-  && dateTime(timeslot->timeslot) >= dateTime(now())
+  && dateTime(timeslot->time) >= dateTime(now())
 ]{
   "id":_id,
   "timeslotId":timeslot->_id,
   "date":timeslot->date,
-  "time":timeslot->timeslot,
+  "time":timeslot->time,
   address1,
   address2,
   city,
